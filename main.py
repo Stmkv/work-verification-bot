@@ -18,9 +18,10 @@ def main():
     params = {}
     while True:
         try:
-            response = requests.get(url, headers=header, timeout=5, params=params)
+            response = requests.get(url, headers=header, timeout=90, params=params)
             response.raise_for_status()
             response = response.json()
+
             if response["status"] == "found":
                 for work in response["new_attempts"]:
                     text = f"""Работа "{work["lesson_title"]}" проверена!\n\n"""
@@ -30,7 +31,7 @@ def main():
                         text += "Работа принята\n\n"
                     text += f"Ссылка на работу {work["lesson_url"]}"
                     bot.send_message(text=text, chat_id=TG_CHAT_ID)
-            pprint.pprint(response)
+
             timestamp = response.get("last_attempt_timestamp")
             params.update({"timestamp": timestamp})
 
