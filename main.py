@@ -1,3 +1,4 @@
+import textwrap
 import time
 
 import requests
@@ -25,13 +26,13 @@ def main():
             if response["status"] == "found":
                 for work in response["new_attempts"]:
                     text = f"""Работа "{work["lesson_title"]}" проверена!\n\n"""
-                    if work["is_negative"]:
-                        text += "В работе найдены ошибки\n\n"
-                    else:
+                    if not work["is_negative"]:
                         text += "Работа принята\n\n"
-                    text += f"Ссылка на работу {work["lesson_url"]}"
+                    text += textwrap.dedent(f"""
+                    В работе найдены ошибки\n\n
+                    Ссылка на работу {work["lesson_url"]}
+                    """)
                     bot.send_message(text=text, chat_id=TG_CHAT_ID)
-
             timestamp = response.get("last_attempt_timestamp")
             params.update({"timestamp": timestamp})
 
