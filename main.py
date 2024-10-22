@@ -10,10 +10,11 @@ def main():
     env.read_env()
     TG_BOT_TOKEN = env.str("TG_BOT_TOKEN")
     TG_CHAT_ID = env.str("TG_CHAT_ID")
+    DEVMAN_TOKEN = env.str("DEVMAN_TOKEN")
     bot = telegram.Bot(token=TG_BOT_TOKEN)
 
     url = "https://dvmn.org/api/long_polling/"
-    header = {"Authorization": "Token 155a9451027aa13b5d65f3191859fb7ec1844dbe"}
+    header = {"Authorization": DEVMAN_TOKEN}
     params = {}
     while True:
         try:

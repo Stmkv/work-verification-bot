@@ -15,7 +15,7 @@ pip install -r requirements.txt
 ```
 TG_BOT_TOKEN='<Token вашего бота>'
 TG_CHAT_ID='<Ваш телеграмм Chat id>'
-
+DEVMAN_TOKEN='<Ваш личный Token Devman>'
 ```
 
 Token бота можно получить [здесь](https://web.telegram.org/k/#@BotFather)
