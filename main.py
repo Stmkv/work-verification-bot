@@ -6,16 +6,28 @@ import telegram
 from environs import Env
 
 
+def send_message(bot, tg_chat_id, result):
+    if result["is_negative"]:
+        text = f"""Работа "{result["lesson_title"]}" проверена!\n\n
+                В работе найдены ошибки\n\n
+                Ссылка на работу {result["lesson_url"]}"""
+    else:
+        text = f"""Работа "{result["lesson_title"]}" проверена!\n\n
+                Работа принята\n\n
+                Ссылка на работу {result["lesson_url"]}"""
+    bot.send_message(text=text, chat_id=tg_chat_id)
+
+
 def main():
     env = Env()
     env.read_env()
-    TG_BOT_TOKEN = env.str("TG_BOT_TOKEN")
-    TG_CHAT_ID = env.str("TG_CHAT_ID")
-    DEVMAN_TOKEN = env.str("DEVMAN_TOKEN")
-    bot = telegram.Bot(token=TG_BOT_TOKEN)
+    tg_bot_token = env.str("TG_BOT_TOKEN")
+    tg_chat_id = env.str("TG_CHAT_ID")
+    devman_token = env.str("DEVMAN_TOKEN")
+    bot = telegram.Bot(token=tg_bot_token)
 
     url = "https://dvmn.org/api/long_polling/"
-    header = {"Authorization": DEVMAN_TOKEN}
+    header = {"Authorization": devman_token}
     params = {}
     while True:
         try:
@@ -25,14 +37,7 @@ def main():
 
             if response["status"] == "found":
                 for work in response["new_attempts"]:
-                    text = f"""Работа "{work["lesson_title"]}" проверена!\n\n"""
-                    if not work["is_negative"]:
-                        text += "Работа принята\n\n"
-                    text += textwrap.dedent(f"""
-                    В работе найдены ошибки\n\n
-                    Ссылка на работу {work["lesson_url"]}
-                    """)
-                    bot.send_message(text=text, chat_id=TG_CHAT_ID)
+                    send_message(bot, tg_chat_id, work)
             timestamp = response.get("last_attempt_timestamp")
             params.update({"timestamp": timestamp})
 
