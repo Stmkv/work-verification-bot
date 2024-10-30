@@ -61,12 +61,12 @@ def main():
             timestamp = response.get("last_attempt_timestamp")
             params.update({"timestamp": timestamp})
 
-        except requests.exceptions.ReadTimeout:
-            logger.info("ReadTimeout")
+        except requests.exceptions.ReadTimeout as err:
+            logger.error(err, exc_info=True)
             time.sleep(1)
             continue
-        except requests.exceptions.ConnectionError:
-            logger.info("ConnectionError")
+        except requests.exceptions.ConnectionError as err:
+            logger.error(err, exc_info=True)
             time.sleep(10)
             continue
 
