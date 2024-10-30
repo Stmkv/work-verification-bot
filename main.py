@@ -1,6 +1,6 @@
 import textwrap
 import time
-
+import logging
 import requests
 import telegram
 from environs import Env
@@ -25,6 +25,7 @@ def main():
     tg_chat_id = env.str("TG_CHAT_ID")
     devman_token = env.str("DEVMAN_TOKEN")
     bot = telegram.Bot(token=tg_bot_token)
+    logging.warning("Бот Запущен!")
 
     url = "https://dvmn.org/api/long_polling/"
     header = {"Authorization": devman_token}
