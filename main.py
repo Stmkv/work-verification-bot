@@ -41,7 +41,7 @@ def main():
 
     FORMAT = "%(asctime)s : %(name)s : %(levelname)s : %(message)s"
     logging.basicConfig(
-        level=logging.INFO,
+        level=logging.WARNING,
         format=FORMAT,
         handlers=[TelegramLogsHandler(bot, tg_chat_id)],
     )
@@ -62,7 +62,7 @@ def main():
             params.update({"timestamp": timestamp})
 
         except requests.exceptions.ReadTimeout as err:
-            logger.error(err, exc_info=True)
+            logger.info(err, exc_info=True)
             time.sleep(1)
             continue
         except requests.exceptions.ConnectionError as err:
