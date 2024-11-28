@@ -34,7 +34,6 @@ def send_message(bot, tg_chat_id, result):
 
 
 
-
 def main():
     env = Env()
     env.read_env()
