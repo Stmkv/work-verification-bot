@@ -19,8 +19,6 @@ class TelegramLogsHandler(logging.Handler):
         self.tg_bot.send_message(chat_id=self.chat_id, text=log_entry)
 
 
-
-
 def send_message(bot, tg_chat_id, result):
     if result["is_negative"]:
         text = f"""Работа "{result["lesson_title"]}" проверена!\n\n
