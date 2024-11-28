@@ -35,7 +35,6 @@ def send_message(bot, tg_chat_id, result):
 
 def main():
     env = Env()
-
     env.read_env()
     tg_bot_token = env.str("TG_BOT_TOKEN")
     tg_chat_id = env.str("TG_CHAT_ID")
