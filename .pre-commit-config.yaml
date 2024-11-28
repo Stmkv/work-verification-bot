@@ -1,0 +1,18 @@
+repos:
+  - repo: https://github.com/pre-commit/mirrors-isort
+    rev: v5.10.1 # Укажите последнюю стабильную версию isort
+    hooks:
+      - id: isort
+        args: ['--settings-file=./.isort.cfg']
+
+  - repo: https://github.com/psf/black
+    rev: 24.10.0 # Укажите последнюю стабильную версию black
+    hooks:
+      - id: black
+        args: ['--config=./.black']
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.1.1 # Укажите последнюю стабильную версию flake8
+    hooks:
+      - id: flake8
+        args: ['--config=.flake8']
