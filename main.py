@@ -5,6 +5,7 @@ import requests
 import telegram
 from environs import Env
 
+
 logger = logging.getLogger("work_verification")
 
 
@@ -28,7 +29,7 @@ def send_message(bot, tg_chat_id, result):
         text = f"""Работа "{result["lesson_title"]}" проверена!\n\n
                 Работа принята\n\n
                 Ссылка на работу {result["lesson_url"]}"""
-    bot.send_message(text = text, chat_id=tg_chat_id)
+    bot.send_message(text=text, chat_id=tg_chat_id)
 
 
 
@@ -54,7 +55,9 @@ def main():
     params = {}
     while True:
         try:
-            response = requests.get(url, headers=header, timeout=90, params=params)
+            response = requests.get(
+                url, headers=header, timeout=90, params=params
+            )
             response.raise_for_status()
             response = response.json()
 
