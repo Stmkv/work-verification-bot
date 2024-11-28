@@ -1,2 +1,2 @@
 line-length = 79
-exclude = ".venv/"
+exclude = [".venv"]
