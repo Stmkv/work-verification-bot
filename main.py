@@ -29,11 +29,13 @@ def send_message(bot, tg_chat_id, result):
         text = f"""Работа "{result["lesson_title"]}" проверена!\n\n
                 Работа принята\n\n
                 Ссылка на работу {result["lesson_url"]}"""
+
     bot.send_message(text=text, chat_id=tg_chat_id)
 
 
 def main():
     env = Env()
+
     env.read_env()
     tg_bot_token = env.str("TG_BOT_TOKEN")
     tg_chat_id = env.str("TG_CHAT_ID")
