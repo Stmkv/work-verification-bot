@@ -32,11 +32,7 @@ def send_message(bot, tg_chat_id, result):
     bot.send_message(text=text, chat_id=tg_chat_id)
 
 
-
-
-
 def main():
-    a=""
     env = Env()
     env.read_env()
     tg_bot_token = env.str("TG_BOT_TOKEN")
